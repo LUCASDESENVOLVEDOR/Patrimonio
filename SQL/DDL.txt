@@ -1,0 +1,41 @@
+
+
+create table perfils (
+	id int primary key identity(1,1) not null,
+	perfil varchar(50) not null
+)
+
+
+
+create table usuarios(
+
+     id  int primary key identity(1,1) not null,
+	 idPerfils int not null foreign key (idPerfils) references perfils (id),
+	 senha varchar(30) not null,
+	 email varchar(255) not null,
+)
+
+
+create table equipamentos (
+
+      id int primary key identity(1,1) not null,
+	  imagem varchar(255) not null,
+	  descricao varchar(255) not null,
+	  ativo bit default 1 not null,
+	  data_cadastro datetime default getdate() not null,
+	  nomePatrimonio varchar(255) not null	  
+)
+
+create table comentarios (
+
+    id int identity(1,1) not null,
+	idEquipamentos int not null foreign key (idEquipamentos) references equipamentos (id),
+	idPerfils int not null foreign key (idPerfils) references perfils (id),
+	comentario varchar(255),
+	data_cadastro datetime default getdate() not null
+
+)
+
+
+
+
