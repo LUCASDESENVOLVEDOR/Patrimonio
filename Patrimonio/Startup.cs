@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Patrimonio.Contexts;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,10 +21,20 @@ namespace Patrimonio
 {
     public class Startup
     {
+
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration _configuration)
+        {
+            Configuration = _configuration;
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            
+
             services
               .AddControllers()
               .AddNewtonsoftJson(options => {
@@ -81,6 +94,11 @@ namespace Patrimonio
             //g the default constraint. See https://go.microsoft.com/fwlink/?linkid=851278 for details.
             //Scaffold - DbContext - Connection "Data Source=DESKTOP-50SJ48N\SQLEXPRESS; Initial Catalog=Patrimonio; Integrated Security=True;" Microsoft.EntityFrameworkCore.SqlServer - OutputDir Domains - ContextDir Contexts - Context PatrimonioContext - force
 
+
+            services.AddDbContext<PatrimonioContext>(options =>
+
+                options.UseSqlServer(Configuration.GetConnectionString("Default"))
+            ); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

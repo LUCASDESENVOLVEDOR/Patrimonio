@@ -9,9 +9,6 @@ namespace Patrimonio.Contexts
 {
     public partial class PatrimonioContext : DbContext
     {
-        public PatrimonioContext()
-        {
-        }
 
         public PatrimonioContext(DbContextOptions<PatrimonioContext> options)
             : base(options)
@@ -27,8 +24,7 @@ namespace Patrimonio.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-50SJ48N\\SQLEXPRESS; Initial Catalog=Patrimonio; Integrated Security=True;");
+                optionsBuilder.UseSqlServer("name=Default");
             }
         }
 
