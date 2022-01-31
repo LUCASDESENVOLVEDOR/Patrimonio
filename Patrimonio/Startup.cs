@@ -9,6 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Patrimonio.Contexts;
+using Patrimonio.Interfaces;
+using Patrimonio.Repositories;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,12 +24,16 @@ namespace Patrimonio
     public class Startup
     {
 
-        public IConfiguration Configuration { get; }
+    
 
         public Startup(IConfiguration _configuration)
         {
             Configuration = _configuration;
         }
+
+        public IConfiguration Configuration { get; }
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -42,16 +48,16 @@ namespace Patrimonio
                   options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
               });
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("CorPolicy",
-            //                    builder =>
-            //                    {
-            //                        builder.WithOrigins("http://localhost:3000")
-            //                        .AllowAnyHeader()
-            //                        .AllowAnyMethod();
-            //                    });
-            //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorPolicy",
+                                builder =>
+                                {
+                                    builder.WithOrigins("http://localhost:3000")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                                });
+            });
 
 
 
@@ -94,11 +100,13 @@ namespace Patrimonio
             //g the default constraint. See https://go.microsoft.com/fwlink/?linkid=851278 for details.
             //Scaffold - DbContext - Connection "Data Source=DESKTOP-50SJ48N\SQLEXPRESS; Initial Catalog=Patrimonio; Integrated Security=True;" Microsoft.EntityFrameworkCore.SqlServer - OutputDir Domains - ContextDir Contexts - Context PatrimonioContext - force
 
-
             services.AddDbContext<PatrimonioContext>(options =>
+                             options.UseSqlServer(Configuration.GetConnectionString("Default"))
+                         );
 
-                options.UseSqlServer(Configuration.GetConnectionString("Default"))
-            ); 
+
+            services.AddTransient<DbContext, PatrimonioContext>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,7 +126,7 @@ namespace Patrimonio
 
             app.UseRouting();
 
-            //app.UseCors("CorPolicy");
+            app.UseCors("CorPolicy");
 
             app.UseAuthentication();
 

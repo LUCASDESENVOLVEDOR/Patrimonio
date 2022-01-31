@@ -9,6 +9,10 @@ namespace Patrimonio.Contexts
 {
     public partial class PatrimonioContext : DbContext
     {
+        public PatrimonioContext()
+        {
+
+        }
 
         public PatrimonioContext(DbContextOptions<PatrimonioContext> options)
             : base(options)

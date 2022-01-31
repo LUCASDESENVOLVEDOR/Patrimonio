@@ -6,10 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Context\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Domains\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
