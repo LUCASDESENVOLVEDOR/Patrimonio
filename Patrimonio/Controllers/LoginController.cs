@@ -69,7 +69,7 @@ namespace Patrimonio.Controllers
                     new Claim(ClaimTypes.Role, usuarioBuscado.IdPerfils.ToString()),
 
                     // armazena na Claim personalizada role o tipo de usuário que está logado
-                  //  new Claim("role", usuarioBuscado.IdTipoUsuario.ToString()),
+                    new Claim("role", usuarioBuscado.IdPerfils.ToString()),
 
                     // Armazena na Claim o nome do usuário que foi autenticado
                    // new Claim(JwtRegisteredClaimNames.Name, usuarioBuscado.NomeUsuario)
