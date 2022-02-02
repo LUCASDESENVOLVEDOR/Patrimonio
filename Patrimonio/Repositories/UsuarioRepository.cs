@@ -16,7 +16,6 @@ namespace Patrimonio.Repositories
         public UsuarioRepository(PatrimonioContext appContext)
         {
             ctx = appContext;
-
         }
 
         public Usuario Login(string email, string senha)
