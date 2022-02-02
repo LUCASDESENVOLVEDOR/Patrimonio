@@ -50,7 +50,7 @@ namespace Patrimonio.Controllers
 
                 if (usuarioBuscado == null)
                 {
-                    return BadRequest("E-mail ou senha inválidos!");
+                    return StatusCode(401, "E-mail ou senha inválidos!");
                 }
 
                 // Caso o usuário seja encontrado, prossegue para a criação do token
