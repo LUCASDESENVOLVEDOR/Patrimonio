@@ -38,7 +38,6 @@ namespace Patrimonio.Contexts
 
             modelBuilder.Entity<Comentario>(entity =>
             {
-                entity.HasNoKey();
 
                 entity.ToTable("comentarios");
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -7,6 +8,7 @@ namespace Patrimonio.Domains
 {
     public partial class Comentario
     {
+        [Key]
         public int Id { get; set; }
         public int IdEquipamentos { get; set; }
         public int IdPerfils { get; set; }

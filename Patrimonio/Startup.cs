@@ -68,7 +68,7 @@ namespace Patrimonio
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "patrimonio.webAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Patrimonio.webAPI", Version = "v1" });
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -122,7 +122,7 @@ namespace Patrimonio
             app.UseSwagger();
 
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gufi.webAPI");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Patrimonio.webAPI");
                 c.RoutePrefix = string.Empty;
             });
 
